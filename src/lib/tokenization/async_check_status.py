@@ -1,34 +1,23 @@
-from snowflake.snowpark import Session
-from protecto_ai import ProtectoVault
+from snowflake.snowpark.context import get_active_session
+from snowflake.snowpark.types import StringType,ArrayType
 import _snowflake
 
-# Define the external access integration for the UDFs
-EXTERNAL_ACCESS_INTEGRATIONS = ('protecto_access_integration',)
+session = get_active_session()
 
-# Define the secrets used for authentication
-SECRETS = {
-    'cred': 'protecto_secret'
-}
+## Should be moved To config file
+SECRETS = {'cred': 'protecto_secret'}
+PACKAGES = ['requests', 'multipledispatch']
+EXTERNAL_ACCESS_INTEGRATIONS = ('protecto_access_integration',)
+IMPORTS = ['@my_stage/protecto_ai.zip']
 
 # Fetch the OAuth token from Snowflake secrets
 def get_auth_token():
     return _snowflake.get_generic_secret_string('cred')
 
-# Define the Snowflake session
-def get_snowflake_session():
-    # Make sure to replace these placeholder values with actual configuration
-    return Session.builder.configs({
-        'account': '<your_account>',
-        'user': '<your_user>',
-        'password': '<your_password>',
-        'role': '<your_role>',
-        'warehouse': '<your_warehouse>',
-        'database': '<your_database>',
-        'schema': '<your_schema>',
-    }).create()
 
 # Define the Snowpark UDF to check the status of an asynchronous mask operation
 def check_mask_async_status(tracking_id: str) -> str:
+    from protecto_ai import ProtectoVault
     auth_token = get_auth_token()
     vault = ProtectoVault(auth_token)
 
@@ -40,14 +29,18 @@ def check_mask_async_status(tracking_id: str) -> str:
     return status
 
 # Register the UDF
-def register_check_mask_async_status(session: Session):
+def register_check_mask_async_status(session: session):
     session.udf.register(
         func=check_mask_async_status,
-        name="protecto_async_check_status",
-        return_type="STRING",
+        name="protecto_async_status",
+        return_type=StringType(),
+        input_types = [StringType()],
         is_permanent=True,
-        stage_location="@my_stage/protecto_ai.zip",
+        replace = True,
+        stage_location="@demos.public.MY_STAGE",
         external_access_integrations=EXTERNAL_ACCESS_INTEGRATIONS,
-        secrets=SECRETS
+        secrets=SECRETS,
+        packages=PACKAGES,
+        imports=IMPORTS
     )
     print("UDF 'protecto_async_check_status' registered successfully.")

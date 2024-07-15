@@ -63,4 +63,4 @@ def register_mask(session):
     )
     print("UDF 'protecto_mask' registered successfully.")
 
-register_mask(session)
+
