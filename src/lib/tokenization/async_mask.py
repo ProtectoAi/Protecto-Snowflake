@@ -5,10 +5,12 @@ import _snowflake
 session = get_active_session()
 
 ## Should be moved To config file
+## Should be moved To config file
 SECRETS = {'cred': 'protecto_secret'}
 PACKAGES = ['requests', 'multipledispatch']
 EXTERNAL_ACCESS_INTEGRATIONS = ('protecto_access_integration',)
 IMPORTS = ['@my_stage/protecto_ai.zip']
+STAGE_LOCATION = "@protecto_snowflake.my_schema.my_stage"
 
 # Fetch the OAuth token from Snowflake secrets
 def get_auth_token():
@@ -37,7 +39,7 @@ def register_async_mask(session: session):
         input_types = [ArrayType(),StringType(),StringType()],
         is_permanent=True,
         replace = True,
-        stage_location="@demos.public.MY_STAGE",
+        stage_location=STAGE_LOCATION,
         external_access_integrations=EXTERNAL_ACCESS_INTEGRATIONS,
         secrets=SECRETS,
         packages=PACKAGES,
