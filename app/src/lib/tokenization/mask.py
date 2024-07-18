@@ -56,6 +56,7 @@ def mask(mask_values: list, token_type: str = "Text Token", format_type: str = "
     else:
         raise ValueError(f"Invalid return_type: {return_type}")
 
+
 # Register the UDF
 def register_mask(session: Session):
     session.udf.register(
