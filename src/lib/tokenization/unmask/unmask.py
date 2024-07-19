@@ -15,27 +15,35 @@ STAGE_LOCATION = "@protecto_snowflake.my_schema.my_stage"
 def get_auth_token():
     return _snowflake.get_generic_secret_string('cred')
 
-
-# Define the Snowpark UDF to check the status of an asynchronous mask operation
-def check_mask_async_status(tracking_id: str) -> str:
+# Define the Snowpark UDF to mask data
+def unmask(unmask_values: list) -> list:
     from protecto_ai import ProtectoVault
     auth_token = get_auth_token()
     vault = ProtectoVault(auth_token)
 
-    if not isinstance(tracking_id, str):
-        raise ValueError("The 'tracking_id' parameter must be a string.")
+    if not isinstance(unmask_values, list):
+        raise ValueError("The 'unmask_values' parameter must be a list.")
     
-    status_data = vault.async_status([tracking_id])
-    status = status_data["data"][0]["status"]
-    return status
+    try:
+        result = vault.unmask(unmask_values)
+    except ConnectionError as e:
+        raise RuntimeError(f"Connection error occurred: {str(e)}")
+    except Exception as e:
+        raise RuntimeError(f"An unexpected error occurred: {str(e)}")
+    
+    if isinstance(result, dict) and 'data' in result:
+        return [item['value'] for item in result['data']]
+    else:
+        raise RuntimeError(f"Unexpected response format: {result}")
+
 
 # Register the UDF
-def register_check_mask_async_status(session: session):
+def register_unmask(session):
     session.udf.register(
-        func=check_mask_async_status,
-        name="protecto_async_status",
-        return_type=StringType(),
-        input_types = [StringType()],
+        func=unmask,
+        name="protecto_unmask",
+        return_type=ArrayType(),
+        input_types = [ArrayType()],
         is_permanent=True,
         replace = True,
         stage_location=STAGE_LOCATION,
@@ -44,4 +52,5 @@ def register_check_mask_async_status(session: session):
         packages=PACKAGES,
         imports=IMPORTS
     )
-    print("UDF 'protecto_async_check_status' registered successfully.")
+    print("UDF 'protecto_unmask' registered successfully.")
+

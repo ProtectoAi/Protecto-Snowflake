@@ -16,7 +16,7 @@ def get_auth_token():
     return _snowflake.get_generic_secret_string('cred')
 
 # Define the Snowpark UDF to mask data
-def unmask(unmask_values: list) -> list:
+def async_unmask(unmask_values: list) -> str:
     from protecto_ai import ProtectoVault
     auth_token = get_auth_token()
     vault = ProtectoVault(auth_token)
@@ -25,23 +25,24 @@ def unmask(unmask_values: list) -> list:
         raise ValueError("The 'unmask_values' parameter must be a list.")
     
     try:
-        result = vault.unmask(unmask_values)
+        tracking_data = vault.async_unmask(unmask_values)
+        if isinstance(tracking_data, dict) and 'data' in tracking_data:
+            tracking_details = [{"tracking_id":tracking_data["data"][0]["tracking_id"],"success":tracking_data["success"],"error":tracking_data["error"]}]
+            return tracking_details
     except ConnectionError as e:
         raise RuntimeError(f"Connection error occurred: {str(e)}")
     except Exception as e:
         raise RuntimeError(f"An unexpected error occurred: {str(e)}")
-    
-    if isinstance(result, dict) and 'data' in result:
-        return [item['value'] for item in result['data']]
+
     else:
         raise RuntimeError(f"Unexpected response format: {result}")
 
 
 # Register the UDF
-def register_unmask(session):
+def register_async_unmask(session):
     session.udf.register(
-        func=unmask,
-        name="protecto_unmask",
+        func=async_unmask,
+        name="protecto_async_unmask",
         return_type=ArrayType(),
         input_types = [ArrayType()],
         is_permanent=True,
@@ -52,6 +53,5 @@ def register_unmask(session):
         packages=PACKAGES,
         imports=IMPORTS
     )
-    print("UDF 'protecto_unmask' registered successfully.")
+    print("UDF 'protecto_async_unmask' registered successfully.")
 
-register_unmask(session)

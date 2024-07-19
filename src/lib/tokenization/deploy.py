@@ -1,11 +1,10 @@
 from snowflake.snowpark import Session
-from mask import register_mask
-from async_mask import register_async_mask
-from async_check_status import register_check_mask_async_status
-from async_mask_result import register_get_mask_async_result
+from src.lib.tokenization.mask.mask import register_mask
+from src.lib.tokenization.mask.async_mask import register_async_mask
+from src.lib.tokenization.mask.async_mask_result import register_get_mask_async_result
 
 def register_tokenization_helpers():
-    from mask import get_snowflake_session
+    from src.lib.tokenization.mask.mask import get_snowflake_session
     session = get_snowflake_session()
 
     # For Streamlit 
@@ -15,7 +14,6 @@ def register_tokenization_helpers():
     # Register all UDFs
     register_mask(session)
     register_async_mask(session)
-    register_check_mask_async_status(session)
     register_get_mask_async_result(session)
     
     print("All UDFs have been registered successfully.")
