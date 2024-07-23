@@ -25,18 +25,19 @@ def get_mask_async_result(tracking_id: str, return_type: str = "token_value") ->
         raise ValueError("The 'tracking_id' parameter must be a string.")
     
     result = vault.async_status([tracking_id])
+
     
     for item in result['data']:
         if return_type == "status" :
             final_result = [{"status": item["status"],"error":item["error_msg"]}]
         elif return_type == "token_value":
-            final_result = [res['token_value'] for res in item['result']]
-        elif return_type == "all":
+            final_result = [{res["value"]:res['token_value']} for res in item['result']]
+        elif return_type == "raw":
             final_result = item['result']
         elif return_type == "toxicity_analysis":
-            final_result = [res['toxicity_analysis'] for res in item['result'] if 'toxicity_analysis' in res ]
+            final_result = [{res["value"]:res['toxicity_analysis']} for res in item['result'] if 'toxicity_analysis' in res ]
         elif return_type in ["toxicity", "severe_toxicity", "obscene", "threat", "insult", "identity_attack"]:
-                final_result = [res['toxicity_analysis'][return_type]  for res in item['result'] if 'toxicity_analysis' in res]
+                final_result = [{res["value"]:res['toxicity_analysis'][return_type]}  for res in item['result'] if 'toxicity_analysis' in res]
         else:
             raise ValueError(f"Invalid return_type: {return_type}")
     
@@ -58,5 +59,4 @@ def register_async_mask_result(session: session):
         imports=IMPORTS
     )
     print("UDF 'protecto_async_mask_result' registered successfully.")
-
 

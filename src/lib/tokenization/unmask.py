@@ -53,4 +53,3 @@ def register_unmask(session):
         imports=IMPORTS
     )
     print("UDF 'protecto_unmask' registered successfully.")
-

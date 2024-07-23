@@ -54,4 +54,3 @@ def register_async_unmask(session):
         imports=IMPORTS
     )
     print("UDF 'protecto_async_unmask' registered successfully.")
-

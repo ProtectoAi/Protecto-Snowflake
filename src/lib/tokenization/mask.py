@@ -38,18 +38,20 @@ def mask(mask_values: list,token_type: str = "None", format_type: str = "None", 
     if not isinstance(result, dict) or 'data' not in result:
         raise RuntimeError(f"Unexpected response format: {result}")
 
-
-
     if return_type == "token_value":
-        return [item['token_value'] for item in result['data']]
-    elif return_type == "all":
+        token_value_dict = {item['value']: item['token_value'] for item in result['data']}
+        return [token_value_dict[mask_value] for mask_value in mask_values]
+    elif return_type == "raw":
         return result['data']
     elif return_type == "toxicity_analysis":
-        return [item['toxicity_analysis'] for item in result['data'] if 'toxicity_analysis' in item ]
+        toxicity_value_dict = {item['value']: item['toxicity_analysis'] for item in result['data'] if 'toxicity_analysis' in item }
+        return [toxicity_value_dict[mask_value] for mask_value in mask_values if toxicity_value_dict]
     elif return_type in ["toxicity", "severe_toxicity", "obscene", "threat", "insult", "identity_attack"]:
-            return [item['toxicity_analysis'][return_type]  for item in result['data'] if 'toxicity_analysis' in item]
+        toxicity_value_dict = {item['value']: item['toxicity_analysis'][return_type]  for item in result['data'] if 'toxicity_analysis' in item }    
+        return [toxicity_value_dict[mask_value] for mask_value in mask_values if toxicity_value_dict]
     else:
         raise ValueError(f"Invalid return_type: {return_type}")
+
 
 
 # Register the UDF
