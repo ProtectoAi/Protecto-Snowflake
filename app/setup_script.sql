@@ -17,11 +17,4 @@ CREATE OR REPLACE STREAMLIT protecto_core.PROTECTO_VAULT
 -- 4. Grant appropriate privileges over these objects to your application roles. 
 GRANT USAGE ON STREAMLIT protecto_core.PROTECTO_VAULT TO APPLICATION ROLE protecto_app_role;
 
--- Create UDFs
-create or replace function protecto_core.hello()
-returns string
-language python
-runtime_version = '3.8'
-packages = ('snowflake-snowpark-python')
-imports = ('/streamlit/hello1.py')
-handler = 'hello1.say_hello';
+

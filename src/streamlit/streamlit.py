@@ -11,9 +11,6 @@ st.title('Hello Snowflake!')
 
 st.header('UDF Example')
 
-st.write(say_hello())
-
-register_protecto_mask()
 
 st.write(
    """TESTING APP
