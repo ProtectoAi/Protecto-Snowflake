@@ -1,25 +1,25 @@
 
-from snowflake.snowpark.context import get_active_session
+#from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.types import StringType,ArrayType
 import _snowflake
 
-session = get_active_session()
+# session = get_active_session()
 
-## Should be moved To config file
-SECRETS = {'cred': 'protecto_secret'}
-PACKAGES = ['requests', 'multipledispatch']
-EXTERNAL_ACCESS_INTEGRATIONS = ('protecto_access_integration',)
-IMPORTS = ['@my_stage/protecto_ai.zip']
-STAGE_LOCATION = "@protecto_snowflake.my_schema.my_stage"
+# ## Should be moved To config file
+# SECRETS = {'cred': 'protecto_secret'}
+# PACKAGES = ['requests', 'multipledispatch']
+# EXTERNAL_ACCESS_INTEGRATIONS = ('protecto_access_integration',)
+# IMPORTS = ['@my_stage/protecto_ai.zip']
+# STAGE_LOCATION = "@protecto_snowflake.my_schema.my_stage"
 
 # Fetch the OAuth token from Snowflake secrets
-def get_auth_token():
-    return _snowflake.get_generic_secret_string('cred')
+# def get_auth_token():
+#     return _snowflake.get_generic_secret_string('cred')
 
 # Define the Snowpark UDF to mask data
 def mask(mask_values: list,token_type: str = "None", format_type: str = "None", return_type: str = "token_value") -> list:
     from protecto_ai import ProtectoVault
-    auth_token = get_auth_token()
+    auth_token =  _snowflake.get_generic_secret_string('cred')
     vault = ProtectoVault(auth_token)
 
     if not isinstance(mask_values, list):
@@ -55,20 +55,20 @@ def mask(mask_values: list,token_type: str = "None", format_type: str = "None", 
 
 
 # Register the UDF
-def register_protecto_mask(session):
-    session.udf.register(
-        func=mask,
-        name="protecto_mask",
-        return_type=ArrayType(),
-        input_types = [ArrayType(),StringType(),StringType(),StringType()],
-        is_permanent=True,
-        replace = True,
-        stage_location=STAGE_LOCATION,
-        external_access_integrations=EXTERNAL_ACCESS_INTEGRATIONS,
-        secrets=SECRETS,
-        packages=PACKAGES,
-        imports=IMPORTS
-    )
-    print("UDF 'protecto_mask' registered successfully.")
+# def register_protecto_mask(session):
+#     session.udf.register(
+#         func=mask,
+#         name="protecto_mask",
+#         return_type=ArrayType(),
+#         input_types = [ArrayType(),StringType(),StringType(),StringType()],
+#         is_permanent=True,
+#         replace = True,
+#         stage_location=STAGE_LOCATION,
+#         external_access_integrations=EXTERNAL_ACCESS_INTEGRATIONS,
+#         secrets=SECRETS,
+#         packages=PACKAGES,
+#         imports=IMPORTS
+#     )
+#     print("UDF 'protecto_mask' registered successfully.")
 
 

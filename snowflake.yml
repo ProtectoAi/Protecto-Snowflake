@@ -3,19 +3,22 @@
 
 definition_version: 1
 native_app:
-  name: Protecto_Snowflake
-  source_stage: core.stage
+  name: PROTECTO
+  source_stage: my_schema.stage
   artifacts:
     - src: app/*
       dest: ./
     - src: src/lib/*
-      dest: lib/
-    - src: src/streamlit/*
       dest: streamlit/
+    - src: src/streamlit/*
+      dest: streamlit/   
+  package:
+    name: PROTECTO_VAULT_PACKAGE
+    scripts:
+      - scripts/any-provider-setup.sql
+  application:
+    name: PROTECTO_VAULT_APP
+    post_deploy:
+      - sql_script: scripts/post_deploy.sql
 
-# If you added any sql scripts under scripts/, you should add the following snippet after `artifacts` under `native_app`.     
-#  package:
-#    scripts:
-#    - scripts/any-provider-setup.sql
-#    - scripts/shared-content.sql
 
