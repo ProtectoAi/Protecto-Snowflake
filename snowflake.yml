@@ -15,7 +15,7 @@ native_app:
   package:
     name: PROTECTO_VAULT_PACKAGE
     scripts:
-      - scripts/any-provider-setup.sql
+      - scripts/pre_deploy.sql
   application:
     name: PROTECTO_VAULT_APP
     post_deploy:

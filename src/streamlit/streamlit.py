@@ -1,18 +1,14 @@
-
-import pandas as pd
 import streamlit as st
-from snowflake.snowpark.functions import call_udf, col
-from snowflake.snowpark import Session
-from hello1 import say_hello,register_protecto_mask
+from snowflake.snowpark.context import get_active_session
 
+
+session = get_active_session()
 
 st.title('Hello Snowflake!')
+
+st.title(say_hello())
 
 
 st.header('UDF Example')
 
-
-st.write(
-   """TESTING APP
-   """)
 
