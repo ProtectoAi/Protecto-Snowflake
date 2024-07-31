@@ -18,19 +18,19 @@ CREATE OR REPLACE STREAMLIT protecto_core.PROTECTO_VAULT
 GRANT USAGE ON STREAMLIT protecto_core.PROTECTO_VAULT TO APPLICATION ROLE protecto_app_role;
 
 
--- -- 5. Register SPROC
+-- Grant execute access to Protecto_role on the specified functions
+GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_mask(ARRAY, STRING, STRING, STRING) TO ROLE protecto_app_role;
+GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_unmask(ARRAY) TO ROLE protecto_app_role;
+GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_async_mask(ARRAY, STRING, STRING) TO ROLE protecto_app_role;
+GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_async_mask_result(STRING,STRING) TO ROLE protecto_app_role;
+GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_async_unmask(ARRAY) TO ROLE protecto_app_role;
+GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_async_unmask_result(STRING,STRING) TO ROLE protecto_app_role;
 
--- -- Create or replace the procedure
--- CREATE OR REPLACE PROCEDURE PROTECTO_CORE.REGISTER_UDF_IN_SCHEMA(db STRING, schema STRING,  stage STRING )
--- RETURNS STRING  
--- LANGUAGE PYTHON
--- RUNTIME_VERSION = '3.8'  
--- PACKAGES = ('snowflake-snowpark-python', 'requests', 'multipledispatch')
--- IMPORTS = ('/streamlit/mask.py')  -- Use relative path
--- HANDLER = 'mask.register_protecto_mask'  -- This is the handler function in the mask.py file
--- EXECUTE AS OWNER;
+-- Grant usage on the secret to Protecto_role
+GRANT USAGE ON SECRET protecto_secret TO ROLE Protecto_role;
 
--- grant usage on procedure PROTECTO_CORE.REGISTER_UDF_IN_SCHEMA(STRING, STRING, STRING ) to application role protecto_app_role;
+-- Grant modify on the secret to Protecto_role
+GRANT MODIFY ON SECRET protecto_secret TO ROLE Protecto_role;
 
 
 
