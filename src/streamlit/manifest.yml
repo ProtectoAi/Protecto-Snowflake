@@ -1,0 +1,51 @@
+manifest_version: 1
+
+version:
+  name: V1
+  label: Version One
+  comment: The first version of the tokenization application
+
+name: tokenization_app
+description: "A Snowflake Native App for data tokenization and masking"
+
+artifacts:
+  - name: async_check_status
+    file: tokenization/async_check_status.py
+  - name: async_mask_result
+    file: tokenization/async_mask_result.py
+  - name: async_mask
+    file: tokenization/async_mask.py
+  - name: demo
+    file: tokenization/demo.py
+  - name: deploy
+    file: tokenization/deploy.py
+  - name: mask
+    file: tokenization/mask.py
+  - setup_script: setup.sql
+  - default_streamlit: app_instance_schema.streamlit
+  - extension_code: true
+
+application:
+  scripts:
+    - async_check_status.py
+    - async_mask_result.py
+    - async_mask.py
+    - mask.py
+  procedures:
+    - name: run_demo
+      description: "Run a demonstration of the tokenization app"
+      file: demo.py
+      return_type: string
+    - name: deploy_app
+      description: "Deploy the tokenization app"
+      file: deploy.py
+      return_type: string
+
+configuration:
+  log_level: debug
+  trace_level: off
+
+privileges:
+  - USAGE
+  - CREATE FUNCTION
+  - CREATE PROCEDURE

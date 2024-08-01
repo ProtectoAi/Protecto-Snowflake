@@ -1,0 +1,1 @@
+/Users/srivigneshwardj/Documents/Protecto/Protecto-Snowflake/app/setup_script.sql

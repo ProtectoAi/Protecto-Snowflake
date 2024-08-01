@@ -1,1 +1,1 @@
-/Users/srivigneshwardj/Documents/Protecto/Protecto-Snowflake/app/src/streamlit/setup.sql
+/Users/srivigneshwardj/Documents/Protecto/Protecto-Snowflake/src/streamlit/setup.sql

@@ -1,1 +1,1 @@
-/Users/srivigneshwardj/Documents/Protecto/Protecto-Snowflake/app/src/streamlit/streamlit.py
+/Users/srivigneshwardj/Documents/Protecto/Protecto-Snowflake/src/streamlit/streamlit.py

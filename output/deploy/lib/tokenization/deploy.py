@@ -1,1 +1,1 @@
-/Users/srivigneshwardj/Documents/Protecto/Protecto-Snowflake/app/src/lib/tokenization/deploy.py
+/Users/srivigneshwardj/Documents/Protecto/Protecto-Snowflake/src/lib/tokenization/deploy.py
