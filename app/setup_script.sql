@@ -16,22 +16,3 @@ CREATE OR REPLACE STREAMLIT protecto_core.PROTECTO_VAULT
 
 -- 4. Grant appropriate privileges over these objects to your application roles. 
 GRANT USAGE ON STREAMLIT protecto_core.PROTECTO_VAULT TO APPLICATION ROLE protecto_app_role;
-
-
--- Grant execute access to Protecto_role on the specified functions
-GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_mask(ARRAY, STRING, STRING, STRING) TO ROLE protecto_app_role;
-GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_unmask(ARRAY) TO ROLE protecto_app_role;
-GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_async_mask(ARRAY, STRING, STRING) TO ROLE protecto_app_role;
-GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_async_mask_result(STRING,STRING) TO ROLE protecto_app_role;
-GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_async_unmask(ARRAY) TO ROLE protecto_app_role;
-GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_async_unmask_result(STRING,STRING) TO ROLE protecto_app_role;
-
--- Grant usage on the secret to Protecto_role
-GRANT USAGE ON SECRET protecto_secret TO ROLE Protecto_role;
-
--- Grant modify on the secret to Protecto_role
-GRANT MODIFY ON SECRET protecto_secret TO ROLE Protecto_role;
-
-
-
-

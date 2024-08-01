@@ -6,9 +6,7 @@ session = get_active_session()
 
 st.title('Hello Snowflake!')
 
-st.title(say_hello())
-
-
 st.header('UDF Example')
+
 
 

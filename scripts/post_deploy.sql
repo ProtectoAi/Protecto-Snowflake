@@ -1,3 +1,4 @@
+
 -- REGISTER PROTECTO MASK
 
 CREATE OR REPLACE FUNCTION protecto_vault.vault_schema.protecto_mask(mask_values ARRAY, token_type STRING DEFAULT 'None', format_type STRING DEFAULT 'None', return_type STRING DEFAULT 'token_value')

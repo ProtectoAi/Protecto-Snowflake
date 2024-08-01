@@ -1,4 +1,3 @@
--- Step 1: Create a database called protecto_vault
 CREATE DATABASE IF NOT EXISTS protecto_vault;
 
 USE DATABASE protecto_vault;
@@ -30,6 +29,8 @@ CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION protecto_external_access_integrati
 ALLOWED_NETWORK_RULES = (protecto_network_rule)
 ALLOWED_AUTHENTICATION_SECRETS = (protecto_secret)
 ENABLED = true;
+
+
 
 
 
