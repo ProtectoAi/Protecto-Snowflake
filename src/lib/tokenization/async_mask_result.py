@@ -31,6 +31,6 @@ def async_mask_result(tracking_id: str, return_type: str = "status") -> list:
         else:
             raise ValueError(f"Invalid return_type: {return_type}")
     
-    return final_result
+        return final_result
 
 
