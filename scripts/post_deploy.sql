@@ -94,6 +94,13 @@ GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_async_mask_result(S
 GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_async_unmask(ARRAY) TO ROLE Protecto_role;
 GRANT USAGE ON FUNCTION protecto_vault.vault_schema.protecto_async_unmask_result(STRING,STRING) TO ROLE Protecto_role;
 
+GRANT CREATE SECRET ON SCHEMA protecto_vault.vault_schema TO ROLE Protecto_role;
+
+GRANT USAGE ON INTEGRATION protecto_external_access_integration TO ROLE Protecto_role;
+
+-- Grant USAGE and MODIFY on the secret to the application role
+GRANT ALTER ON SECRET protecto_vault.vault_schema.protecto_secret TO ROLE Protecto_role;
+
 
 
 
