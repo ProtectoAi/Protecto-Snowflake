@@ -4,20 +4,18 @@
 definition_version: 1
 native_app:
   name: PROTECTO
-  source_stage: my_schema.stage
+  source_stage: VAULT.PACKAGE_STAGE
   artifacts:
     - src: app/*
       dest: ./
     - src: src/lib/*
-      dest: streamlit/
-    - src: src/streamlit/*
-      dest: streamlit/   
+      dest: ./
   package:
-    name: PROTECTO_VAULT_PACKAGE
+    name: PROTECTO_PACKAGE
     scripts:
       - scripts/pre_deploy.sql
   application:
-    name: PROTECTO_VAULT_APP
+    name: PROTECTO_APP
     post_deploy:
       - sql_script: scripts/post_deploy.sql
 

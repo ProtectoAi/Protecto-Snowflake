@@ -20,7 +20,7 @@ def async_unmask_result(tracking_id: str, return_type: str = "status") -> list:
         if return_type == "status":
             final_result = [{"status": item["status"],"error":item["error_msg"]}]
         elif return_type == "value":
-            final_result = [res['value'] for res in item['result']]
+            final_result = [{res["token_value"]:res['value']} for res in item['result']]             
         else:
             raise ValueError(f"Invalid return_type: {return_type}")
     

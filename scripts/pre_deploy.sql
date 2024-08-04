@@ -1,43 +1,49 @@
-CREATE DATABASE IF NOT EXISTS protecto_vault;
+-- Define variables
+SET DBNAME = 'PROTECTO';
+SET SCHEMA = 'VAULT';
+SET STAGE = 'APP_STAGE';
+SET NETWORK_RULE = 'PROTECTO_NETWORK';
+SET API_SECRET = 'PROTECTO_API_KEY';
+SET EXTERNAL_ACCESS_INTEGRATION = 'PROTECTO_API';
 
-USE DATABASE protecto_vault;
+-- Step 1: Create database if it does not exist
+CREATE DATABASE IF NOT EXISTS IDENTIFIER($DBNAME);
 
--- Step 2: Create a schema called vault_schema
-CREATE SCHEMA IF NOT EXISTS vault_schema;
+-- Use the database
+USE DATABASE IDENTIFIER($DBNAME);
 
-USE SCHEMA vault_schema;
+-- Step 2: Create schema if it does not exist
+CREATE SCHEMA IF NOT EXISTS IDENTIFIER($SCHEMA);
 
--- Step 3: Create a stage called vault_stage
-CREATE STAGE IF NOT EXISTS protecto_vault.vault_schema.vault_stage;
+-- Use the schema
+USE SCHEMA IDENTIFIER($SCHEMA);
+
+-- Step 3: Create stage if it does not exist
+SET SQL_STATEMENT = 
+    'CREATE STAGE IF NOT EXISTS ' || $DBNAME || '.' || $SCHEMA || '.' || $STAGE;
+
+-- Execute the SQL statement
+EXECUTE IMMEDIATE $SQL_STATEMENT;
 
 -- Step 4: Create network rule, secret, and external access integration
 
-
----- network rule
-CREATE OR REPLACE NETWORK RULE protecto_network_rule
+-- Create network rule
+CREATE OR REPLACE NETWORK RULE IDENTIFIER($NETWORK_RULE)
 MODE = EGRESS
 TYPE = HOST_PORT
 VALUE_LIST = ('trial.protecto.ai');
 
---- Secret
-CREATE OR REPLACE SECRET protecto_secret
+-- Create secret
+CREATE OR REPLACE SECRET IDENTIFIER($API_SECRET)
 TYPE = GENERIC_STRING
 SECRET_STRING = '';
 
---- external access integration
-CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION protecto_external_access_integration
-ALLOWED_NETWORK_RULES = (protecto_network_rule)
-ALLOWED_AUTHENTICATION_SECRETS = (protecto_secret)
-ENABLED = true;
+-- Create external access integration
+SET SQL_STATEMENT = 
+    'CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION ' || $EXTERNAL_ACCESS_INTEGRATION || 
+    ' ALLOWED_NETWORK_RULES = (' || $NETWORK_RULE || ')' ||
+    ' ALLOWED_AUTHENTICATION_SECRETS = (' || $API_SECRET || ')' ||
+    ' ENABLED = true;';
 
-
-
-
-
-
-
-
-
-
-
-
+-- Execute the SQL statement
+EXECUTE IMMEDIATE $SQL_STATEMENT;
