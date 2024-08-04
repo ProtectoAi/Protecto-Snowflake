@@ -24,17 +24,12 @@ Tokenization library allows for customized tokenization and detokenization proce
 
 | **Directory/File**               | **Description**                                                                                           | **Link**                                                                 |
 |---------------------------------|-----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| **`/app`**                       | Holds your Snowflake Native App files.| [app](./app)                                                                                                    |
-| **`/app/README.md`**             | Exposed to the account installing the application with details on what it does and how to use it.         | [README.md](./app/README.md)                                              |
-| **`/app/manifest.yml`**          | Defines properties required by the application package. Find more details at the Manifest Documentation. | [manisfest.yml](./app/manifest.yml) |
-| **`/app/setup_script.sql`**      | Contains SQL statements that are run when a consumer installs or upgrades a Snowflake Native App.        | [setup_script.sql](./app/setup_script.sql)                                |
+| **`/app`**                       | Holds Snowflake Native App and Streamlit files.| [app](./app)                                                                                                    |
 | **`/scripts`**                  | Contains `pre_deploy.sql` and `post_deploy.sql` for creating objects and helper UDFs.                     | [scripts](./scripts)                                                                        |
-| **`/scripts/pre_deploy.sql`**    | Creates necessary objects before deployment.                                                             | [pre_deploy.sql](./scripts/pre_deploy.sql)                                |
-| **`/scripts/post_deploy.sql`**   | Creates necessary objects after deployment.                                                              | [post_deploy.sql](./scripts/post_deploy.sql)                              |
-| **`/src`**                      | Contains all the necessary Streamlit code and libraries for registering the Protecto UDFs.                | [src](./src)                                                                       |
+| **`/src`**                      | Contains all library files for registering the Protecto UDFs.                | [src](./src)                                                                       |
 | **`/docs`**                     | Contains the API reference documentation for Protecto UDFs and related functionalities.                    | [docs](./docs)                                                                       |
 | **`/samples`**                  | Contains code examples demonstrating how to utilize the Protecto UDFs effectively.                       | [samples](./samples)                                                                       |
-| **`/data`**                     | Contains sample datasets that can be loaded into Snowflake and used to run sample files.                  | [docs](./data)                                                                        |
+| **`/data`**                     | Contains sample datasets that can be loaded into Snowflake and used to run sample files.                  | [data](./data)                                                                        |
 | **`snowflake.yml`**             | Used by Snowflake CLI to discover your project's code and interact with Snowflake.                        | [snowflake.yml](./snowflake.yml)                                        |
 
 
