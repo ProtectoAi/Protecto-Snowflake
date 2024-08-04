@@ -2,3 +2,6 @@ snowflake.local.yml
 output/
 **/__pycache__/
 **/.pytest_cache/
+local_test_env.yml
+.gitignore
+pytest.ini
