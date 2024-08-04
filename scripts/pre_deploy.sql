@@ -21,8 +21,8 @@ VALUE_LIST = ('trial.protecto.ai');
 
 --- Secret
 CREATE OR REPLACE SECRET protecto_secret
-  TYPE = GENERIC_STRING
-  SECRET_STRING = '';
+TYPE = GENERIC_STRING
+SECRET_STRING = '';
 
 --- external access integration
 CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION protecto_external_access_integration
