@@ -1,4 +1,4 @@
-# Data Folder
+# Sample Data
 
 This folder contains sample datasets that can be loaded into Snowflake tables and utilized to run the sample files. These datasets are crucial for demonstrating the functionality of Protecto UDFs and other related features. Below is a table describing each dataset, along with its source.
 
@@ -6,7 +6,7 @@ This folder contains sample datasets that can be loaded into Snowflake tables an
 
 | **Dataset**           | **Description**                                                                 | **Source**                                  |
 |-----------------------|---------------------------------------------------------------------------------|---------------------------------------------|
-| `PII_DATA.csv`  | This is an LLM-generated external dataset for the.The Learning Agency Lab - PII Data Detection Competition    | [Kaggle](hhttps://www.kaggle.com/datasets/alejopaullier/pii-external-dataset)           |
+| `PII_DATA.csv`  | This is an LLM-generated external dataset for the.The Learning Agency Lab - PII Data Detection Competition    | [Kaggle](https://www.kaggle.com/datasets/alejopaullier/pii-external-dataset)           |
 
 
 ## Usage
