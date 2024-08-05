@@ -12,7 +12,7 @@ Tokenization library allows for customized tokenization and detokenization proce
 
 1. **Snowflake Account with External Offering Terms Enabled**: Ensure that your Snowflake account has external offering terms enabled. For more information, refer to the [Snowflake UDF Python Packages Documentation](https://docs.snowflake.com/en/developer-guide/udf/python/udf-python-packages).
 
-2. **ACCOUNT ADMIN Previliges in Snowflake**: You need ACCOUNTADMIN privileges in Snowflake to set up and manage the Protecto UDFs and other associated objects.
+2. **ACCOUNT ADMIN Previliges in Snowflake**: You need `ACCOUNTADMIN` privileges in Snowflake to set up and manage the Protecto UDFs and other associated objects.
 
 3. **Snowflake Availability Region**: To utilize the functionality with Snowflake Cortex, your Snowflake account must be in one of the required availability regions. For details, see the [Snowflake Cortex Availability Documentation](https://docs.snowflake.com/en/user-guide/snowflake-cortex/llm-functions#availability).
 
