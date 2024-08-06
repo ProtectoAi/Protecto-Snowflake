@@ -19,9 +19,6 @@ Tokenization library allows for customized tokenization and detokenization proce
 4. **Protecto Auth Key**: Acquire your Protecto auth key by following the step-by-step guide available here. [Protecto Auth Key](https://developer.protecto.ai/docs/step-by-step-guide-to-obtain-your-auth-token/)
 
 
- 
-# Directory Structure
-
 # Directory Structure
 
 | **Objects**                     | **Description**                                                                                           |
