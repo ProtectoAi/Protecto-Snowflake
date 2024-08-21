@@ -29,6 +29,7 @@ Tokenization library allows for customized tokenization and detokenization proce
 | [**`/docs`**](./docs)           | Contains the API reference documentation for Protecto UDFs and related functionalities.                    |
 | [**`/samples`**](./samples)     | Contains code examples demonstrating how to utilize the Protecto UDFs effectively.                        |
 | [**`/data`**](./data)           | Contains sample datasets that can be loaded into Snowflake and used to run sample files.                  |
+| [**`/images`**](./images)           | Contains Protecto-Snowflake integration,architecure and process flow images.                  |
 | [**`snowflake.yml`**](./snowflake.yml) | Used by Snowflake CLI to discover your project's code and interact with Snowflake.                        |
 
 

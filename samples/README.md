@@ -10,6 +10,7 @@ This folder contains detailed code examples demonstrating how to utilize the Pro
 | [**`tokenization_async.ipynb`**](./tokenization_async.ipynb)       | Demonstrates asynchronous tokenization using Protecto UDFs.                                         |
 | [**`tokenization_sync_sql.ipynb`**](./tokenization_sync_sql.ipynb)    | Provides examples of synchronous tokenization using Protecto UDFs within SQL queries.                |
 | [**`tokenization_async_sql.ipynb`**](./tokenization_async_sql.ipynb)   | Provides examples of asynchronous tokenization using Protecto UDFs within SQL queries.               |
+| [**`tokenization_cortex.ipynb`**](./tokenization_cortex.ipynb)   | Provides examples of using protecto tokenization functionality in Snowflake Cortex.               |
 
 
 ## Usage
